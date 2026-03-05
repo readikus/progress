@@ -18,7 +18,7 @@ curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh |
 
 <br>
 
-[Why](#why) · [Install](#install) · [Commands](#commands) · [How It Works](#how-it-works) · [Configuration](#configuration)
+[Why](#why) · [Quick Start](#quick-start) · [Commands](#commands) · [How It Works](#how-it-works) · [Configuration](#configuration)
 
 </div>
 
@@ -40,17 +40,38 @@ Progress does this for you. It scans your git history, groups commits into theme
 
 ---
 
-## Install
+## Quick Start
 
-**One command:**
+**1. Install:**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh | bash
 ```
 
-This clones the repo to `~/.progress/repo/` and symlinks the commands into Claude Code.
+**2. Restart Claude Code** for the commands to be available.
 
-**Restart Claude Code** for the commands to be available.
+**3. Set up your profile:**
+
+```
+/progress:onboard
+```
+
+Onboarding asks a few quick questions — most are auto-detected from your git config:
+
+1. **Name** — for report headers
+2. **Git author** — to filter commits
+3. **Repos** — which repos to scan
+4. **Sprint length** — your sprint cadence (default: 2 weeks)
+5. **Highlights** — what you want to showcase (features, refactoring, mentorship, etc.)
+6. **Context** — team name, project info, anything that helps write better summaries
+
+Saved to `~/.progress/profile.json`. Run `/progress:onboard` again anytime to update.
+
+**4. Generate a report:**
+
+```
+/progress:standup
+```
 
 <details>
 <summary><strong>Manual install</strong></summary>
@@ -79,27 +100,6 @@ rm -rf ~/.claude/commands/progress ~/.progress
 ```
 
 </details>
-
----
-
-## Getting Started
-
-After installing and restarting Claude Code:
-
-```
-/progress:onboard
-```
-
-Onboarding asks a few quick questions:
-
-1. **Name** — for report headers (auto-detected from git config)
-2. **Git author** — to filter commits (auto-detected)
-3. **Repos** — which repos to scan (defaults to current directory)
-4. **Sprint length** — your sprint cadence (default: 2 weeks)
-5. **Highlights** — what you want to showcase (features, refactoring, mentorship, etc.)
-6. **Context** — team name, project info, anything that helps write better summaries
-
-Saved to `~/.progress/profile.json`. Run `/progress:onboard` again anytime to update.
 
 ---
 
