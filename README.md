@@ -6,7 +6,6 @@
 
 **Set up once. Never repeat yourself.**
 
-[![GitHub stars](https://img.shields.io/github/stars/readikus/progress?style=for-the-badge&logo=github&color=181717)](https://github.com/readikus/progress)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
 <br>
