@@ -30,13 +30,15 @@ Every week it's the same thing. Open git log. Squint at commit messages. Try to 
 
 Progress does this for you. It scans your git history, groups commits into themes, and generates reports tailored to your audience. It remembers your repos, your team context, and what you care about highlighting — so you set it up once and just run it.
 
-**Three audiences, three commands:**
+**Three reports, each adapted to your audience:**
 
 | Command | For | Default Period |
 |---------|-----|----------------|
 | `/progress:standup` | Daily standups — concise bullet points | Last day |
 | `/progress:sprint` | Sprint demos — narrative + metrics with comparisons | Last sprint |
 | `/progress:review` | Performance reviews — full breakdown with trends | Last quarter |
+
+Language adapts automatically — technical detail for engineering teams, business impact and plain language for stakeholders and leadership.
 
 ---
 
@@ -62,8 +64,13 @@ Onboarding asks a few quick questions — most are auto-detected from your git c
 2. **Git author** — to filter commits
 3. **Repos** — which repos to scan
 4. **Sprint length** — your sprint cadence (default: 2 weeks)
-5. **Highlights** — what you want to showcase (features, refactoring, mentorship, etc.)
-6. **Context** — team name, project info, anything that helps write better summaries
+5. **Standup audience** — who hears your standups (e.g., engineering team, mixed)
+6. **Sprint demo audience** — who sees demos (e.g., stakeholders, product team)
+7. **Review audience** — who reads reviews (e.g., engineering manager, CTO, just you)
+8. **Highlights** — what you want to showcase (features, refactoring, mentorship, etc.)
+9. **Context** — team name, project info, role, anything that helps write better summaries
+
+Audience settings shape the language of each report — technical detail for engineers, business impact and plain language for stakeholders.
 
 Saved to `~/.progress/profile.json`. Run `/progress:onboard` again anytime to update.
 
@@ -86,8 +93,14 @@ ln -sfn ~/.progress/repo/commands/progress ~/.claude/commands/progress
 <details>
 <summary><strong>Update</strong></summary>
 
+From within Claude Code:
+```
+/progress:update
+```
+
+Or from the terminal:
 ```bash
-cd ~/.progress/repo && git pull
+curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh | bash
 ```
 
 </details>
@@ -104,6 +117,16 @@ rm -rf ~/.claude/commands/progress ~/.progress
 ---
 
 ## Commands
+
+| Command | What it does |
+|---------|--------------|
+| `/progress:onboard` | Set up or update your profile (repos, audiences, highlights) |
+| `/progress:standup` | Concise standup summary — last day by default |
+| `/progress:sprint` | Sprint demo with metrics and comparisons |
+| `/progress:review` | Detailed personal review with trends and full commit log |
+| `/progress:update` | Update Progress to the latest version |
+
+---
 
 ### `/progress:standup`
 
