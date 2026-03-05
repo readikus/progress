@@ -183,7 +183,7 @@ Commits are grouped into themes (features, fixes, refactors) using commit messag
 
 ### 4. Format — tailor to audience
 
-Output is formatted for the specific audience — bullet points for standups, narrative + metrics for sprint demos, full data dump for reviews.
+Output is formatted for the specific audience — bullet points for standups, narrative + metrics for sprint demos, full data dump for reviews. Language adapts based on who's reading: technical detail for engineers, business impact and plain language for stakeholders.
 
 ### 5. Track — save for comparisons
 
@@ -215,6 +215,9 @@ Everything stays local on your machine:
 | `periods.standup` | Auto | Default: "1 day" |
 | `periods.sprint` | Onboarding | Default: "2 weeks" (your sprint length) |
 | `periods.review` | Auto | Default: "3 months" |
+| `audiences.standup` | Onboarding | Who hears your standup (shapes technical depth) |
+| `audiences.sprint` | Onboarding | Who sees sprint demos (technical vs business language) |
+| `audiences.review` | Onboarding | Who reads reviews (manager vs self-tracking) |
 | `highlight_areas` | Onboarding | What to prioritize in summaries |
 | `notes` | Onboarding | Free-text context (team, project, role) |
 

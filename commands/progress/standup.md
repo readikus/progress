@@ -26,7 +26,7 @@ If it doesn't exist, tell the user:
 "No profile found. Run `/progress:onboard` first to set up your preferences."
 Then stop.
 
-Parse the profile for: `git_author`, `repos`, `default_period`, `highlight_areas`, `notes`.
+Parse the profile for: `git_author`, `repos`, `periods.standup`, `audiences.standup`, `highlight_areas`, `notes`.
 
 ---
 
@@ -73,6 +73,11 @@ Read through all commit messages, file paths, and PR titles. Group them into the
 
 Use `profile.highlight_areas` to prioritize what to surface.
 Use `profile.notes` for team/project context that helps explain the work.
+
+**Adapt language to `profile.audiences.standup`:**
+- **Technical audience** (e.g., "engineering team"): Use technical terms freely — mention specific services, refactors, caching strategies, API changes. Engineers want to know *how* things were done.
+- **Mixed audience** (e.g., "product and engineering"): Lead with what was achieved, add light technical context in parentheses. Balance outcomes with implementation.
+- **Non-technical audience**: Focus purely on outcomes and impact. "Improved search speed" not "Added Redis caching layer to search endpoint".
 
 ---
 

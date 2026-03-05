@@ -61,11 +61,26 @@ Let them add multiple. Store as array.
 Default: "2 weeks"
 This sets the default period for `/progress:sprint`.
 
-**Q5 - Highlight areas**
+**Q5 - Standup audience**
+"Who's your standup audience? (e.g., 'engineering team', 'mixed technical and non-technical', 'just me')"
+Default: "engineering team"
+Explain: "This shapes the language — technical detail for engineers, outcomes and impact for mixed audiences."
+
+**Q6 - Sprint demo audience**
+"Who do you present sprint demos to? (e.g., 'product and engineering', 'stakeholders and leadership', 'whole company')"
+Default: "product and engineering"
+Explain: "For technical audiences I'll include implementation details. For non-technical audiences I'll focus on features delivered, business impact, and plain language."
+
+**Q7 - Review audience**
+"Who reads your performance reviews? (e.g., 'engineering manager', 'CTO', 'just me for self-tracking')"
+Default: "engineering manager"
+Explain: "This determines how much technical depth vs leadership/impact framing to use."
+
+**Q8 - Highlight areas**
 "What do you like to highlight in reports? Comma-separated. Examples: features, bug fixes, refactoring, mentorship, performance, testing, architecture, code reviews"
 Default: "features, bug fixes, refactoring"
 
-**Q6 - Context**
+**Q9 - Context**
 "Anything else I should know? Team name, project context, role — anything that helps me write better summaries. (optional, press enter to skip)"
 Store as free text in `profile.notes`.
 
@@ -87,6 +102,11 @@ Write to `~/.progress/profile.json`:
     "standup": "1 day",
     "sprint": "<sprint length from Q4>",
     "review": "3 months"
+  },
+  "audiences": {
+    "standup": "<standup audience from Q5>",
+    "sprint": "<sprint demo audience from Q6>",
+    "review": "<review audience from Q7>"
   },
   "highlight_areas": ["<area1>", "<area2>"],
   "notes": "<free text or empty string>",
@@ -111,6 +131,9 @@ Profile saved to ~/.progress/profile.json
   Repos:          /Users/ianread/Code/project-a
                   /Users/ianread/Code/project-b
   Report periods: standup = 1 day, sprint = 2 weeks, review = 3 months
+  Audiences:      standup → engineering team
+                  sprint  → stakeholders and leadership
+                  review  → engineering manager
   Highlights:     features, bug fixes, refactoring
   Notes:          Payments team
 

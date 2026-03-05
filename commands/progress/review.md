@@ -26,7 +26,7 @@ If it doesn't exist, tell the user:
 "No profile found. Run `/progress:onboard` first to set up your preferences."
 Then stop.
 
-Parse the profile for: `name`, `git_author`, `repos`, `default_period`, `highlight_areas`, `notes`.
+Parse the profile for: `name`, `git_author`, `repos`, `periods.review`, `audiences.review`, `highlight_areas`, `notes`.
 
 ---
 
@@ -118,6 +118,11 @@ Also identify:
 
 Use `profile.highlight_areas` and `profile.notes` for context.
 Read `CLAUDE.md` files in scanned repos for project context.
+
+**Adapt language to `profile.audiences.review`:**
+- **Engineering manager**: Balance technical depth with impact. Show breadth of contribution — features, mentorship, code quality, architecture. Frame work in terms of team velocity and technical leadership.
+- **Senior leadership / CTO**: Emphasize strategic impact, cross-team collaboration, and system-level improvements. Less implementation detail, more "why it matters".
+- **Self-tracking**: Full technical detail. This is your personal record — include everything.
 
 ---
 

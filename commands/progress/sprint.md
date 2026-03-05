@@ -26,7 +26,7 @@ If it doesn't exist, tell the user:
 "No profile found. Run `/progress:onboard` first to set up your preferences."
 Then stop.
 
-Parse the profile for: `name`, `git_author`, `repos`, `default_period`, `highlight_areas`, `notes`.
+Parse the profile for: `name`, `git_author`, `repos`, `periods.sprint`, `audiences.sprint`, `highlight_areas`, `notes`.
 
 ---
 
@@ -104,6 +104,10 @@ Use `profile.highlight_areas` to weight what gets top billing.
 Use `profile.notes` for project/team context.
 
 Also read `CLAUDE.md` in each scanned repo (if it exists) for additional project context.
+
+**Adapt language to `profile.audiences.sprint`:**
+- **Technical audience** (e.g., "engineering team", "product and engineering"): Include implementation details, architecture decisions, technical debt addressed. Can reference specific technologies and patterns.
+- **Non-technical / leadership audience** (e.g., "stakeholders and leadership", "whole company"): Lead with business outcomes and user impact. Translate technical work into plain language — "Reduced page load time by 40%" not "Migrated to server-side rendering with streaming". Metrics should focus on user/business value where possible.
 
 ---
 
