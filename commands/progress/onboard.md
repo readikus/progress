@@ -56,20 +56,17 @@ Default: [git config user.name]
 Default: [current working directory]
 Let them add multiple. Store as array.
 
-**Q4 - Default period**
-"What time period should reports cover by default? (e.g., '1 week', '2 weeks', '1 month')"
-Default: "1 week"
+**Q4 - Sprint length**
+"How long are your sprints? (e.g., '1 week', '2 weeks')"
+Default: "2 weeks"
+This sets the default period for `/progress:sprint`.
 
-**Q5 - Default audience**
-"What's your go-to report type? (standup / sprint / review)"
-Default: "standup"
-
-**Q6 - Highlight areas**
+**Q5 - Highlight areas**
 "What do you like to highlight in reports? Comma-separated. Examples: features, bug fixes, refactoring, mentorship, performance, testing, architecture, code reviews"
 Default: "features, bug fixes, refactoring"
 
-**Q7 - Context**
-"Anything else I should know? Team name, sprint cadence, project context — anything that helps me write better summaries. (optional, press enter to skip)"
+**Q6 - Context**
+"Anything else I should know? Team name, project context, role — anything that helps me write better summaries. (optional, press enter to skip)"
 Store as free text in `profile.notes`.
 
 ---
@@ -86,14 +83,19 @@ Write to `~/.progress/profile.json`:
   "name": "<name>",
   "git_author": "<author>",
   "repos": ["<path1>", "<path2>"],
-  "default_period": "<period>",
-  "default_audience": "<audience>",
+  "periods": {
+    "standup": "1 day",
+    "sprint": "<sprint length from Q4>",
+    "review": "3 months"
+  },
   "highlight_areas": ["<area1>", "<area2>"],
   "notes": "<free text or empty string>",
   "created": "<ISO date>",
   "updated": "<ISO date>"
 }
 ```
+
+Note: each report type has its own default period — standup covers the last day, sprint covers the sprint length, review covers a quarter. Users can always override with arguments.
 
 ---
 
@@ -108,11 +110,15 @@ Profile saved to ~/.progress/profile.json
   Git author:     Ian Read
   Repos:          /Users/ianread/Code/project-a
                   /Users/ianread/Code/project-b
-  Default period: 1 week
-  Default report: standup
+  Report periods: standup = 1 day, sprint = 2 weeks, review = 3 months
   Highlights:     features, bug fixes, refactoring
-  Notes:          Payments team, 2-week sprints
+  Notes:          Payments team
 
-You're all set. Run /progress:standup, /progress:sprint, or /progress:review to generate a report.
-To update these settings, run /progress:onboard again.
+You're all set. Try it out:
+  /progress:standup   — what you did today/yesterday
+  /progress:sprint    — your sprint summary
+  /progress:review    — quarterly personal review
+
+Override period with arguments: /progress:standup last 3 days
+Update preferences anytime: /progress:onboard
 ```

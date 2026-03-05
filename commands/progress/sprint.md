@@ -32,9 +32,9 @@ Parse the profile for: `name`, `git_author`, `repos`, `default_period`, `highlig
 
 ## Step 2: Determine Period
 
-- If the user provided input, use that as the period.
-- Otherwise use `profile.default_period`.
-- Fallback: "2 weeks" (sprints are typically longer than standups).
+- If the user provided input (e.g., "last 3 weeks"), use that as the period.
+- Otherwise use `profile.periods.sprint`.
+- Fallback: "2 weeks".
 
 Convert to a git-compatible `--since` value.
 

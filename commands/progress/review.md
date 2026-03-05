@@ -32,9 +32,9 @@ Parse the profile for: `name`, `git_author`, `repos`, `default_period`, `highlig
 
 ## Step 2: Determine Period
 
-- If the user provided input, use that as the period.
-- Otherwise use `profile.default_period`.
-- Fallback: "1 month" (reviews tend to cover longer periods).
+- If the user provided input (e.g., "last 6 months", "since jan 1"), use that as the period.
+- Otherwise use `profile.periods.review`.
+- Fallback: "3 months".
 
 Convert to a git-compatible `--since` value.
 

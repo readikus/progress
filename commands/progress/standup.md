@@ -32,11 +32,11 @@ Parse the profile for: `git_author`, `repos`, `default_period`, `highlight_areas
 
 ## Step 2: Determine Period
 
-- If the user provided input (e.g., "last 2 weeks"), use that as the period.
-- Otherwise use `profile.default_period`.
-- Fallback: "1 week".
+- If the user provided input (e.g., "last 3 days"), use that as the period.
+- Otherwise use `profile.periods.standup`.
+- Fallback: "1 day".
 
-Convert to a git-compatible `--since` value.
+Convert to a git-compatible `--since` value (e.g., "1 day ago", "3 days ago").
 
 ---
 

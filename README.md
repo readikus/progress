@@ -1,84 +1,236 @@
+<div align="center">
+
 # Progress
 
-A Claude Code skill that summarizes your development work from git history, tailored for different audiences.
+**Developer work summaries from git history — for standups, sprint demos, and performance reviews.**
 
-Stop repeating yourself every standup. Progress remembers your preferences, scans your repos, and generates reports in seconds.
+**Set up once. Never repeat yourself.**
 
-## Install
+[![GitHub stars](https://img.shields.io/github/stars/readikus/progress?style=for-the-badge&logo=github&color=181717)](https://github.com/readikus/progress)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
 
-One command:
+<br>
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh | bash
 ```
 
-Or manually:
+**Restart Claude Code, then run `/progress:onboard` to get started.**
+
+<br>
+
+[Why](#why) · [Install](#install) · [Commands](#commands) · [How It Works](#how-it-works) · [Configuration](#configuration)
+
+</div>
+
+---
+
+## Why
+
+Every week it's the same thing. Open git log. Squint at commit messages. Try to remember what that PR was actually about. Cobble together a standup update or sprint summary from memory.
+
+Progress does this for you. It scans your git history, groups commits into themes, and generates reports tailored to your audience. It remembers your repos, your team context, and what you care about highlighting — so you set it up once and just run it.
+
+**Three audiences, three commands:**
+
+| Command | For | Default Period |
+|---------|-----|----------------|
+| `/progress:standup` | Daily standups — concise bullet points | Last day |
+| `/progress:sprint` | Sprint demos — narrative + metrics with comparisons | Last sprint |
+| `/progress:review` | Performance reviews — full breakdown with trends | Last quarter |
+
+---
+
+## Install
+
+**One command:**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh | bash
+```
+
+This clones the repo to `~/.progress/repo/` and symlinks the commands into Claude Code.
+
+**Restart Claude Code** for the commands to be available.
+
+<details>
+<summary><strong>Manual install</strong></summary>
 
 ```bash
 git clone https://github.com/readikus/progress.git ~/.progress/repo
-ln -sf ~/.progress/repo/commands/progress ~/.claude/commands/progress
+ln -sfn ~/.progress/repo/commands/progress ~/.claude/commands/progress
 ```
 
-## Usage
+</details>
 
-First time, run onboarding to set your preferences (repos, report style, highlights):
+<details>
+<summary><strong>Update</strong></summary>
+
+```bash
+cd ~/.progress/repo && git pull
+```
+
+</details>
+
+<details>
+<summary><strong>Uninstall</strong></summary>
+
+```bash
+rm -rf ~/.claude/commands/progress ~/.progress
+```
+
+</details>
+
+---
+
+## Getting Started
+
+After installing and restarting Claude Code:
 
 ```
 /progress:onboard
 ```
 
-Then generate reports:
+Onboarding asks a few quick questions:
+
+1. **Name** — for report headers (auto-detected from git config)
+2. **Git author** — to filter commits (auto-detected)
+3. **Repos** — which repos to scan (defaults to current directory)
+4. **Sprint length** — your sprint cadence (default: 2 weeks)
+5. **Highlights** — what you want to showcase (features, refactoring, mentorship, etc.)
+6. **Context** — team name, project info, anything that helps write better summaries
+
+Saved to `~/.progress/profile.json`. Run `/progress:onboard` again anytime to update.
+
+---
+
+## Commands
+
+### `/progress:standup`
+
+Concise bullet-point summary for daily standups.
 
 ```
-/progress:standup              # Concise bullet points for daily standups
-/progress:sprint               # Narrative + metrics for sprint demos
-/progress:review               # Detailed breakdown for self-tracking
+/progress:standup                  # What you did today
+/progress:standup last 3 days      # Override period
+/progress:standup since monday     # Natural language works
 ```
 
-Override the time period with arguments:
+Output:
+```
+## Standup Update — last day
+
+**Done:**
+- Implemented user auth flow (5 commits across auth-service)
+- Fixed pagination bug in search results
+- Reviewed 2 PRs on payments-api
+
+**In Progress:**
+- Checkout flow refactor (WIP commits on feature branch)
+```
+
+---
+
+### `/progress:sprint`
+
+Narrative summary with metrics table and period-over-period comparisons. Built for sprint demos and team presentations.
 
 ```
-/progress:standup last 2 weeks
-/progress:sprint since feb 20
-/progress:review last month
+/progress:sprint                   # Last sprint
+/progress:sprint last 3 weeks      # Override period
 ```
 
-Re-run onboarding anytime to update preferences:
+Output includes:
+- **Metrics table** with deltas vs last sprint (commits, PRs, LOC)
+- **What was delivered** — narrative paragraph with context
+- **Technical improvements** — refactors, performance, tests
+- **Collaboration** — reviews, mentorship
+- **Codebase impact** — which areas saw the most activity
+
+---
+
+### `/progress:review`
+
+Detailed personal review with full metrics, categorized breakdown, trends, and complete commit log. For self-tracking and performance reviews.
 
 ```
-/progress:onboard
+/progress:review                   # Last quarter
+/progress:review last 6 months     # Override period
+/progress:review since jan 1       # Annual review
 ```
 
-## What it does
+Output includes:
+- **Metrics with trends** across multiple periods
+- **Work breakdown** — features, bug fixes, refactoring, tests, infra, reviews
+- **Hotspots** — most-modified files
+- **Activity patterns** — busiest days/weeks
+- **Full commit log** grouped by date
 
-- Scans git history across multiple repos you configure
-- Pulls PR data via GitHub CLI (optional)
-- Groups commits into meaningful themes (features, fixes, refactors)
-- Formats output for your audience: standup, sprint, or personal review
-- Tracks metrics history locally for period-over-period comparisons
-- Remembers your preferences after a one-time setup
+---
 
-## What gets stored
+## How It Works
+
+### 1. Profile — remember preferences
+
+`/progress:onboard` saves your settings to `~/.progress/profile.json`. Every report command reads this so you never repeat yourself.
+
+### 2. Gather — scan git history
+
+Each command runs `git log` across your configured repos, filtered by your author name and the report's time period. If GitHub CLI (`gh`) is available, it also pulls PR and review data.
+
+### 3. Analyze — group and contextualize
+
+Commits are grouped into themes (features, fixes, refactors) using commit messages, file paths, and PR titles. Your highlight preferences and team context shape what gets surfaced.
+
+### 4. Format — tailor to audience
+
+Output is formatted for the specific audience — bullet points for standups, narrative + metrics for sprint demos, full data dump for reviews.
+
+### 5. Track — save for comparisons
+
+Metrics are saved to `~/.progress/history/` so future reports can show trends and period-over-period deltas.
+
+---
+
+## Configuration
 
 Everything stays local on your machine:
 
 ```
 ~/.progress/
-  profile.json                # Your preferences (created by /progress:onboard)
+  profile.json                # Your preferences (from /progress:onboard)
   history/                    # Metrics snapshots for trend comparisons
     2026-03-05-standup.json
     2026-02-26-sprint.json
+    2026-01-01-review.json
   repo/                       # Cloned skill repo (if installed via curl)
 ```
 
-## Uninstall
+### Profile fields
 
-```bash
-rm -rf ~/.claude/commands/progress ~/.progress
-```
+| Field | Set during | What it does |
+|-------|-----------|--------------|
+| `name` | Onboarding | Name used in report headers |
+| `git_author` | Onboarding | Filters `git log --author` |
+| `repos` | Onboarding | Repos to scan (+ current directory always included) |
+| `periods.standup` | Auto | Default: "1 day" |
+| `periods.sprint` | Onboarding | Default: "2 weeks" (your sprint length) |
+| `periods.review` | Auto | Default: "3 months" |
+| `highlight_areas` | Onboarding | What to prioritize in summaries |
+| `notes` | Onboarding | Free-text context (team, project, role) |
+
+---
 
 ## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - Git
 - GitHub CLI (`gh`) — optional, enables PR and review data
+
+---
+
+<div align="center">
+
+**Stop cobbling together updates from memory. Let your git history speak for itself.**
+
+</div>
