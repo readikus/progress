@@ -26,9 +26,11 @@ curl -fsSL https://raw.githubusercontent.com/readikus/progress/main/install.sh |
 
 ## Why
 
-Every week it's the same thing. Open git log. Squint at commit messages. Try to remember what that PR was actually about. Cobble together a standup update or sprint summary from memory.
+Engineers tend to undersell themselves. You spend a week deep in a gnarly migration, untangling race conditions, or fixing that one bug that took three days to reproduce — and when it comes time for the sprint demo or your annual review, you shrug and say "not much, just some fixes." The fiddly, tedious work that keeps systems running gets forgotten first, even though it's often the most valuable.
 
-Progress does this for you. It scans your git history, groups commits into themes, and generates reports tailored to your audience. It remembers your repos, your team context, and what you care about highlighting — so you set it up once and just run it.
+Progress is a Claude Code skill that makes sure none of that gets lost. It scans your git history, groups commits into meaningful themes, and generates reports tailored to your audience — so the work you actually did gets the credit it deserves.
+
+Set it up once. It remembers your repos, your team context, and what you care about highlighting.
 
 **Three reports, each adapted to your audience:**
 
