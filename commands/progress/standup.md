@@ -1,3 +1,14 @@
+---
+name: progress:standup
+description: Generate a concise standup summary of recent development work
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Glob
+  - Grep
+---
+
 # Progress: Standup Report
 
 Generate a concise standup-style summary of recent development work.

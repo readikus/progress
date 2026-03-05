@@ -1,3 +1,14 @@
+---
+name: progress:review
+description: Generate a detailed personal review with full metrics, trends, and commit history
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Glob
+  - Grep
+---
+
 # Progress: Personal Review
 
 Generate a detailed personal review of your development work — full metrics, categorized breakdown, commit log, and trends. For self-tracking, performance reviews, and personal reflection.

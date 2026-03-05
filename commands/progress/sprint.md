@@ -1,3 +1,14 @@
+---
+name: progress:sprint
+description: Generate a sprint summary with metrics and comparisons for demos and presentations
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Glob
+  - Grep
+---
+
 # Progress: Sprint Report
 
 Generate a narrative sprint summary with metrics and comparisons — suitable for sprint demos, team presentations, or stakeholder updates.

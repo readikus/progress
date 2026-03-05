@@ -1,3 +1,13 @@
+---
+name: progress:onboard
+description: Set up your progress reporting preferences (repos, report style, highlights)
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - AskUserQuestion
+---
+
 # Progress: Onboarding
 
 Set up your progress profile so future reports know your preferences without asking.
