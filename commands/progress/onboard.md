@@ -5,7 +5,8 @@ allowed-tools:
   - Read
   - Bash
   - Write
-  - AskUserQuestion
+  - Glob
+  - Grep
 ---
 
 # Progress: Onboarding
