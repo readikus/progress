@@ -70,6 +70,7 @@ Set it up once. It remembers your repos, your team context, and what you care ab
 | `/progress:standup` | Concise standup summary | Last day |
 | `/progress:sprint` | Sprint demo with metrics and comparisons | Last sprint |
 | `/progress:review` | Detailed personal review with trends and full commit log | Last quarter |
+| `/progress:metrics` | Colorful CLI dashboard with period-over-period comparisons | Last week |
 | `/progress:update` | Update Progress to the latest version | — |
 
 All report commands accept period overrides: `/progress:standup last 3 days`, `/progress:sprint since feb 20`, `/progress:review last 6 months`
@@ -137,6 +138,39 @@ Output includes:
 - **Hotspots** — most-modified files
 - **Activity patterns** — busiest days/weeks
 - **Full commit log** grouped by date
+
+---
+
+### `/progress:metrics`
+
+Standalone colorful CLI dashboard — no report, just the numbers. Compares 4 consecutive periods with proportional bar charts and trend arrows.
+
+```
+/progress:metrics                  # Last week vs previous 3 weeks
+/progress:metrics last 2 weeks     # Override period
+/progress:metrics last sprint      # Uses your sprint length
+```
+
+Output (rendered with ANSI colors in your terminal):
+```
+  PROGRESS METRICS
+  Ian Read  |  Comparing 4 x 1 week periods
+
+  COMMITS
+  This period    ████████████████████  42     ▲ +34% vs avg
+  Prev 1         ██████████████        28
+  Prev 2         ████████████████      35
+  Prev 3         ██████████            18
+                                  avg: 27
+
+  LINES ADDED
+  This period    ████████████████      1,204  ▲ +12% vs avg
+  ...
+  ──────────────────────────────────────
+  Net lines: +891  |  Commits/day: 6.0  |  Top repo: next-app
+```
+
+The metrics dashboard also appears inline at the end of `/progress:standup`, `/progress:sprint`, and `/progress:review` — comparing against previous periods of the same length.
 
 ---
 
