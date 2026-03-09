@@ -111,6 +111,45 @@ Guidelines:
 
 ---
 
+## Step 5b: Render Metrics Dashboard
+
+After the standup report, render a colorful CLI metrics dashboard comparing the current period against the **previous 2 same-length periods**.
+
+First, gather metrics for 3 consecutive windows of the same period length (e.g., for "1 day": today, yesterday, day before). For each window, run the same git commands from Step 3 but with `--since` and `--until` to bound each window. For the current window, omit `--until`.
+
+Then output the dashboard using a **single bash command with `printf` statements and ANSI escape codes**. This MUST be terminal output, NOT markdown.
+
+**Color scheme:**
+- `\033[1;36m` — Cyan bold: headers, current period bars
+- `\033[1;37m` — White bold: current period values
+- `\033[1;32m` — Green: positive trends (▲)
+- `\033[1;31m` — Red: negative trends (▼)
+- `\033[1;33m` — Yellow: flat trends (▸)
+- `\033[0;90m` — Gray: previous period values and bars
+- `\033[0m` — Reset
+
+**Layout for each metric** (Commits, Lines Added, Lines Removed, Files Changed, PRs Merged if available):
+```
+  COMMITS
+  This period    ████████████████████  42     ▲ +34% vs avg
+  Prev 1         ██████████████        28
+  Prev 2         ████████████████      35
+                                  avg: 32
+```
+
+- Scale bars proportionally: max value across all windows = 20 block characters (`\xe2\x96\x88`)
+- Right-align numbers in a consistent column
+- Skip any metric that is 0 across all windows
+- Format large numbers with commas
+
+**Bottom summary line:**
+```
+  ──────────────────────────────────────
+  Net lines: +204  |  Commits/day: 3.2  |  Top repo: <basename>
+```
+
+---
+
 ## Step 6: Save History
 
 Write metrics snapshot for future comparisons:

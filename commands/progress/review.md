@@ -199,6 +199,46 @@ Guidelines:
 
 ---
 
+## Step 6b: Render Metrics Dashboard
+
+After the review report, render a colorful CLI metrics dashboard comparing the current review period against the **previous 3 same-length periods**.
+
+Gather metrics for 4 consecutive windows of the review period length (e.g., for "3 months": current 3 months, previous 3 months, 6-9 months ago, 9-12 months ago). For each window, run the same git commands from Step 3 but with `--since` and `--until` to bound each window. For the current window, omit `--until`.
+
+Output the dashboard using a **single bash command with `printf` statements and ANSI escape codes**. This MUST be terminal output, NOT markdown.
+
+**Color scheme:**
+- `\033[1;36m` — Cyan bold: headers, current period bars
+- `\033[1;37m` — White bold: current period values
+- `\033[1;32m` — Green: positive trends (▲)
+- `\033[1;31m` — Red: negative trends (▼)
+- `\033[1;33m` — Yellow: flat trends (▸)
+- `\033[0;90m` — Gray: previous period values and bars
+- `\033[0m` — Reset
+
+**Layout for each metric** (Commits, Lines Added, Lines Removed, Files Changed, PRs Merged, PRs Reviewed, Issues Closed, Active Days — if available):
+```
+  COMMITS
+  This period    ████████████████████  342    ▲ +18% vs avg
+  Prev 1         ██████████████        248
+  Prev 2         ████████████████      289
+  Prev 3         ██████████████████    312
+                                  avg: 283
+```
+
+- Scale bars proportionally: max value across all windows = 20 block characters (`\xe2\x96\x88`)
+- Right-align numbers in a consistent column
+- Skip any metric that is 0 across all windows
+- Format large numbers with commas
+
+**Bottom summary line:**
+```
+  ──────────────────────────────────────
+  Net lines: +12,408  |  Commits/day: 3.8  |  Top repo: <basename>  |  Active: 58/90 days
+```
+
+---
+
 ## Step 7: Save History
 
 ```bash
